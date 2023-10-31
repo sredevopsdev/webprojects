@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: directus
+  namespace: apps
+spec:
+  selector:
+    matchLabels:
+      app: directus
+  template:
+    metadata:
+      labels:
+        app: directus
+    spec:
+      containers:
+      - name: directus
+        image: ghcr.io/directus/directus:10.7.1
+        # load a secret for env vars:
+        envFrom:
+        - secretRef:
+            name: directus-env
+        ports:
+        - containerPort: 8055
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 128m
+            memory: "256Mi"
