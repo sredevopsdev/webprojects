@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgresql
-  namespace: directus
 spec:
   selector:
     matchLabels:
@@ -34,7 +33,9 @@ spec:
         volumeMounts:
         - name: postgresql-data
           mountPath: /var/lib/postgresql/data
+          readOnly: false
       volumes:
       - name: postgresql-data
         persistentVolumeClaim:
           claimName: postgresql-pvc
+
