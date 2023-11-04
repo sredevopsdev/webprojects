@@ -15,6 +15,10 @@ spec:
       containers:
       - name: redis
         image: redis:latest
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - secretRef:
+            name: redis-secrets
         resources:
           limits:
             memory: "128Mi"
@@ -37,8 +41,8 @@ spec:
       name: redis-pvc
     spec:
       accessModes:
-      - ReadWriteMany
+      - ReadWriteOnce
       resources:
         requests:
-          storage: 1Gi
-      storageClassName: longhorn-rwx
+          storage: 512Mi
+      storageClassName: longhorn

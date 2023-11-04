@@ -23,10 +23,9 @@ metadata:
   labels:
     app: redis
 spec:
-  storageClassName: longhorn-rwx
+  storageClassName: longhorn
   accessModes:
-  - ReadWriteMany
-  volumeMode: Filesystem
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 512Mi
