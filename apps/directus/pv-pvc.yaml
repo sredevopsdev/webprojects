@@ -6,9 +6,11 @@ metadata:
   labels:
     app: postgresql
 spec:
-  storageClassName: longhorn
+  storageClassName: longhorn-rwx
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
+  volumeMode: Filesystem
   resources:
     requests:
       storage: 1Gi
+
