@@ -4,4 +4,4 @@ resources:
 - directus/namespace.yaml
 - directus/pv-pvc.yaml
 - directus/postgres.yaml
-- directus/redis.yaml
+# - directus/redis.yaml
