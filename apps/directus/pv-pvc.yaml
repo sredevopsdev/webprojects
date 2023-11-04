@@ -14,3 +14,19 @@ spec:
     requests:
       storage: 1Gi
 
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+  namespace: directus
+  labels:
+    app: redis
+spec:
+  storageClassName: longhorn-rwx
+  accessModes:
+  - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
