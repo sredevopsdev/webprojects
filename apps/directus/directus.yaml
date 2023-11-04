@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: directus
-  namespace: apps
+  namespace: directus
 spec:
   selector:
     matchLabels:
@@ -21,6 +21,14 @@ spec:
             name: directus-env
         ports:
         - containerPort: 8055
+        volumeMounts:
+        - name: directus-data
+          mountPath: /directus/public/uploads
+        - name: directus-config
+          mountPath: /directus/config
+        securityContext:
+          allowPrivilegeEscalation: false
+
         resources:
           limits:
             cpu: 1000m

@@ -5,6 +5,7 @@ namespace: apps
 
 resources:
 - directus/namespace.yaml
+- directus/pv-pvc.yaml
 - directus/postgres.yaml
-- directus/redis.yaml
-- directus/directus.yaml
+# - directus/redis.yaml
+# - directus/directus.yaml

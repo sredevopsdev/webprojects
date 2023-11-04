@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgresql
-  namespace: apps
+  namespace: directus
 spec:
   selector:
     matchLabels:
@@ -15,16 +15,9 @@ spec:
       containers:
       - name: postgresql
         image: postgres:13
-        env:
-        - name: POSTGRES_USER
-          value: directus
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgresql-secrets
-              key: postgres-password
-        - name: POSTGRES_DB
-          value: directus
+        envFrom:
+        - secretRef:
+            name: postgresql-secrets
         resources:
           limits:
             memory: "128Mi"
