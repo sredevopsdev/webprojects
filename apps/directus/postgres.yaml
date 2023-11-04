@@ -13,11 +13,11 @@ spec:
         app: postgresql
     spec:
       containers:
-      - name: postgresql
+      - name: postgis
+        image: postgis/postgis:13-master
         imagePullPolicy: IfNotPresent
         securityContext:
           allowPrivilegeEscalation: false
-        image: postgres:13
         envFrom:
         - secretRef:
             name: postgresql-secrets

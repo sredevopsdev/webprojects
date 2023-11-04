@@ -7,7 +7,7 @@ spec:
   interval: 1h0m0s
   ref:
     branch: staging
-  url: https://github.com/sredevopsdev/webprojects
+  url: https://github.com/sredevopsdev/webprojects.git
   secretRef:
     name: github-sredevops-creds
 ---

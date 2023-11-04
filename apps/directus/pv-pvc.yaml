@@ -27,3 +27,5 @@ spec:
       storage: 1Gi
   storageClassName: longhorn-rwx
   volumeName: postgresql-pv
+
+
