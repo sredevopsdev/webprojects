@@ -1,3 +1,20 @@
+# FILEPATH: /Users/ngeorger/sredevops/webprojects/apps/directus/postgres-pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgresql-pv
+  namespace: directus
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: longhorn-rwx
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: postgresql-pv
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -10,3 +27,4 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: longhorn-rwx
+  volumeName: postgresql-pv
