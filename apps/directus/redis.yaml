@@ -41,7 +41,6 @@ spec:
             - ALL
             add:
             - NET_BIND_SERVICE
-          # runAsNonRoot: true
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: false
         envFrom:
@@ -60,7 +59,6 @@ spec:
         - name: redis-data
           mountPath: /data
           readOnly: false
-          # subPath: redis-data
         - name: config
           mountPath: /etc/redis/redis.conf
           subPath: redis.conf
@@ -70,7 +68,7 @@ spec:
         emptyDir:
           medium: Memory
           sizeLimit: 128Mi
-      - name: config # use configmap as volume
+      - name: config
         configMap:
           name: redis-config
           items:
