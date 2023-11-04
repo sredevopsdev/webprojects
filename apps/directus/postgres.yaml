@@ -14,20 +14,21 @@ spec:
     spec:
       containers:
       - name: postgis
-        image: postgis/postgis:13-master
+        image: docker.io/postgis/postgis:16-3.4
         imagePullPolicy: IfNotPresent
         securityContext:
           allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
         envFrom:
         - secretRef:
             name: postgresql-secrets
         resources:
           limits:
+            memory: "1024Mi"
+            cpu: "1000m"
+          requests:
             memory: "512Mi"
             cpu: "500m"
-          requests:
-            memory: "128Mi"
-            cpu: "250m"
 
         ports:
         - containerPort: 5432
