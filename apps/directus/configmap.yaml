@@ -1,0 +1,8 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
+  namespace: directus
+data:
+  redis.conf: "bind 0.0.0.0\nport 6379\nrequirepass 05f269165238594d0ec13303e2e87782 \nuser lorea on \nappendonly yes\nsave 60 1\n"
