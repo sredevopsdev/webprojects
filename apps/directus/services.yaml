@@ -28,7 +28,6 @@ spec:
     port: 6379
     targetPort: 6379
   type: ClusterIP
-  clusterIP: None
 
 ---
 # PostGIS Service
@@ -45,6 +44,4 @@ spec:
     port: 5432
     targetPort: 5432
   type: ClusterIP
-  clusterIP: None
-
 
