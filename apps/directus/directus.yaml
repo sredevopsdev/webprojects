@@ -22,10 +22,10 @@ spec:
         ports:
         - containerPort: 8055
         volumeMounts:
-        - name: directus-data
-          mountPath: /directus/public/uploads
-        - name: directus-config
-          mountPath: /directus/config
+        - name: directus-uploads
+          mountPath: /directus/uploads
+        - name: directus-extensions
+          mountPath: /directus/extensions
         securityContext:
           allowPrivilegeEscalation: false
 

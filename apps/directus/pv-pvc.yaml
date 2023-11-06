@@ -13,7 +13,40 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: directus-uploads
+  namespace: directus
+  labels:
+    app: directus
+spec:
+  storageClassName: longhorn-rwx
+  accessModes:
+  - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 5Gi
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: directus-extensions
+  namespace: directus
+  labels:
+    app: directus
+spec:
+  storageClassName: longhorn-rwx
+  accessModes:
+  - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 5Gi
 # ---
 # apiVersion: v1
 # kind: PersistentVolumeClaim
@@ -29,3 +62,4 @@ spec:
 #   resources:
 #     requests:
 #       storage: 512Mi
+---
