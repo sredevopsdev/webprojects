@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: directus
-        image: ghcr.io/directus/directus:10.7.1
+        image: ghcr.io/directus/directus:10.7.2
         # load a secret for env vars:
         envFrom:
         - secretRef:
@@ -36,3 +36,10 @@ spec:
           requests:
             cpu: 128m
             memory: "256Mi"
+      volumes:
+      - name: directus-uploads
+        persistentVolumeClaim:
+          claimName: directus-uploads
+      - name: directus-extensions
+        persistentVolumeClaim:
+          claimName: directus-extensions

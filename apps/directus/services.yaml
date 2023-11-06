@@ -1,0 +1,47 @@
+# Directus Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: directus
+  namespace: directus
+spec:
+  selector:
+    app: directus
+  ports:
+  - protocol: TCP
+    port: 8055
+    targetPort: 8055
+  type: ClusterIP
+
+---
+# Redis Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: directus
+spec:
+  selector:
+    app: redis
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPort: 6379
+  type: ClusterIP
+
+---
+# PostGIS Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgis
+  namespace: directus
+spec:
+  selector:
+    app: postgresql
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
+  type: ClusterIP
+

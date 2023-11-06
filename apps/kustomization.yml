@@ -6,5 +6,6 @@ resources:
 - directus/postgres.yaml
 - directus/configmap.yaml
 - directus/redis.yaml
+- directus/services.yaml
 - directus/directus.yaml
 
