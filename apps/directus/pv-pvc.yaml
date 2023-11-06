@@ -47,19 +47,4 @@ spec:
   resources:
     requests:
       storage: 5Gi
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: redis-pvc
-#   namespace: directus
-#   labels:
-#     app: redis
-# spec:
-#   storageClassName: longhorn
-#   accessModes:
-#   - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 512Mi
 ---
