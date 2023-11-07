@@ -5,7 +5,7 @@ metadata:
   namespace: n8n
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 300Gi
+      storage: 10Gi

@@ -1,10 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- directus/namespace.yaml
-- directus/pv-pvc.yaml
-- directus/postgres.yaml
-- directus/redis.yaml
-- directus/services.yaml
-- directus/ingress.yaml
-- directus/directus.yaml
+- directus/kustomization.yaml
+- n8n/kustomization.yaml

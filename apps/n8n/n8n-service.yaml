@@ -6,11 +6,11 @@ metadata:
   name: n8n
   namespace: n8n
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-    - name: "5678"
-      port: 5678
-      targetPort: 5678
-      protocol: TCP
+  - name: "5678"
+    port: 5678
+    targetPort: 5678
+    protocol: TCP
   selector:
     service: n8n
