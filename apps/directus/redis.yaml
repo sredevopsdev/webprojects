@@ -16,7 +16,8 @@ spec:
       - name: redis
         image: redis:latest
         imagePullPolicy: IfNotPresent
-        command: ["redis-server", "--bind 0.0.0.0", "--port 6379", "--requirepass $REDIS_PASSWORD", "--user $REDIS_USER on", "--appendonly yes", "--save 60 1"]
+        command: ["redis-server", "--bind 0.0.0.0", "--port 6379", "--requirepass $REDIS_PASSWORD", "--user $REDIS_USER on", "--appendonly yes", "--save 60 1", "--maxmemory 256mb", "--maxmemory-policy allkeys-lru", "--database 0", "--dir /data"]
+        # command: ["redis-server", "--bind 0.0.0.0 --port 6379 --requirepass $REDIS_PASSWORD --user $REDIS_USER on --appendonly yes --save 60 1"]
         securityContext:
           #   capabilities:
           #     drop:
