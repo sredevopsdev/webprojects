@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sredevops2
+  template:
+    metadata:
+      namespace: sredevops
+      labels:
+        app: sredevops2
+    spec:
+      volumes:
+      - name: sredevops-static-ghost
+        persistentVolumeClaim:
+          claimName: pvc-456195e9-d67e-43a0-9fbc-a324e3f9e2cd
+      - name: ghost-config-prod
+        secret:
+          secretName: ghost-config-prod
+          defaultMode: 420
+      - name: tmp
+        emptyDir:
+          sizeLimit: 128Mi
+      containers:
+      - name: sredevops2
+        image: ghcr.io/sredevopsdev/ghost-on-kubernetes:main
+        ports:
+        - name: sredevops
+          containerPort: 2368
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: production
+        resources:
+          limits:
+            cpu: '2'
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            memory: 512Mi
+        volumeMounts:
+        - name: sredevops-static-ghost
+          mountPath: /var/lib/ghost/content
+          subPath: content
+        - name: ghost-config-prod
+          readOnly: true
+          mountPath: /var/lib/ghost/config.production.json
+          subPath: config.production.json
+        - name: tmp
+          mountPath: /tmp
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/arch: amd64

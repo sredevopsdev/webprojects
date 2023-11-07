@@ -8,4 +8,4 @@ resources:
 - directus/redis.yaml
 - directus/services.yaml
 - directus/directus.yaml
-
+- ghost/deployment.yaml
