@@ -4,8 +4,7 @@ resources:
 - directus/namespace.yaml
 - directus/pv-pvc.yaml
 - directus/postgres.yaml
-- directus/configmap.yaml
 - directus/redis.yaml
 - directus/services.yaml
+- directus/ingress.yaml
 - directus/directus.yaml
-- ghost/deployment.yaml
