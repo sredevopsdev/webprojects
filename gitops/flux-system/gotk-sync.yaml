@@ -21,6 +21,13 @@ spec:
   interval: 60m0s
   path: ./gitops
   prune: true
+  timeout: 2m0s
   sourceRef:
     kind: GitRepository
     name: flux-system
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: traefik
+    namespace: kube-system
+
