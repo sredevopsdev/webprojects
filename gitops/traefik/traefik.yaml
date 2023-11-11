@@ -17,14 +17,19 @@ spec:
   chart:
     spec:
       chart: traefik
+      reconcileStrategy: ChartVersion
       version: 25.0.0
       sourceRef:
         kind: HelmRepository
         name: traefik
-        namespace: flux-system
-  interval: 6h0m0s
-  timeout: 5m
+  install:
+    crds: Create
+  interval: 24h0m0s
+  timeout: 10m
   releaseName: traefik
+  targetNamespace: kube-system
+  upgrade:
+    crds: CreateReplace
   valuesFrom:
   - kind: ConfigMap
     name: traefik-helm-chart-value-overrides

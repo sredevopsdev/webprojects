@@ -12,10 +12,10 @@ data:
       kubernetesIngress:
         publishedService:
           enabled: true
+        ingressClass: traefik
+        
     priorityClassName: "system-cluster-critical"
-    # image:
-    #   repository: "rancher/mirrored-library-traefik"
-    #   tag: "2.10.5"
+
     tolerations:
     - key: "CriticalAddonsOnly"
       operator: "Exists"
@@ -27,18 +27,14 @@ data:
       effect: "NoSchedule"
     service:
       ipFamilyPolicy: SingleStack
-      ## List of IP families (e.g. IPv4 and/or IPv6).
-      ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
       ipFamilies:
         - IPv4
-      #   - IPv6
-    # Default values for Traefik
     image:
       # -- Traefik image host registry
       registry: docker.io
       # -- Traefik image repository
       repository: traefik
       # -- defaults to appVersion
-      tag: ""
+      tag: "v2.10.5"
       # -- Traefik image pull policy
       pullPolicy: IfNotPresent
