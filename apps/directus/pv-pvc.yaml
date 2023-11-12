@@ -6,9 +6,9 @@ metadata:
   labels:
     app: postgresql
 spec:
-  storageClassName: longhorn-rwx
+  storageClassName: longhorn
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   volumeMode: Filesystem
   resources:
     requests:
@@ -23,13 +23,13 @@ metadata:
   labels:
     app: directus
 spec:
-  storageClassName: longhorn-rwx
+  storageClassName: longhorn
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   volumeMode: Filesystem
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi
 ---
 
 apiVersion: v1
@@ -40,9 +40,9 @@ metadata:
   labels:
     app: directus
 spec:
-  storageClassName: longhorn-rwx
+  storageClassName: longhorn
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   volumeMode: Filesystem
   resources:
     requests:

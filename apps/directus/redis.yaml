@@ -16,8 +16,8 @@ spec:
       - name: redis
         image: redis:latest
         imagePullPolicy: IfNotPresent
-        command: ["redis-server", "--bind 0.0.0.0", "--port 6379", "--requirepass $REDIS_PASSWORD", "--user $REDIS_USER on", "--appendonly yes", "--save 60 1", "--maxmemory 256mb", "--maxmemory-policy allkeys-lru", "--database 0", "--dir /data"]
-        # command: ["redis-server", "--bind 0.0.0.0 --port 6379 --requirepass $REDIS_PASSWORD --user $REDIS_USER on --appendonly yes --save 60 1"]
+        command: ["redis-server", "/etc/redis/redis.conf"]
+        # command: ["redis-server", "--bind 0.0.0.0", "--port 6379", "--requirepass $REDIS_PASSWORD", "--user $REDIS_USER on", "--appendonly yes", "--save 60 1", "--maxmemory 256mb", "--maxmemory-policy allkeys-lru", "--database 0", "--dir /data"]
         securityContext:
           #   capabilities:
           #     drop:
@@ -26,26 +26,29 @@ spec:
           #     - NET_BIND_SERVICE
           #     - CHOWN
           allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: false
-        envFrom:
-        - secretRef:
-            name: redis-secrets
+          readOnlyRootFilesystem: true
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "500m"
+            memory: 256Mi
+            cpu: 250m
           requests:
-            memory: "64Mi"
-            cpu: "250m"
+            memory: 0Mi
+            cpu: 0m
         ports:
         - containerPort: 6379
         volumeMounts:
         - name: redis-data
           mountPath: /data
           readOnly: false
-
+        - name: redis-config
+          mountPath: /etc/redis/redis.conf
+          subPath: redis.conf
+          readOnly: true
       volumes:
       - name: redis-data
         emptyDir:
           medium: Memory
-          sizeLimit: "256Mi"
+          sizeLimit: 256Mi          
+      - name: redis-config
+        secret:
+          secretName: redis-secrets
