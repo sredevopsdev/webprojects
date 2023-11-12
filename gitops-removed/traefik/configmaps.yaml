@@ -1,10 +1,10 @@
-apiVersion: v1
-kind: ConfigMap
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
 metadata:
-  name: traefik-helm-chart-value-overrides
+  name: traefik
   namespace: kube-system
-data:
-  values.yaml: |-
+spec:
+  valuesContent: |-
     podAnnotations:
       prometheus.io/port: "8082"
       prometheus.io/scrape: "true"
@@ -38,3 +38,11 @@ data:
       tag: "v2.10.5"
       # -- Traefik image pull policy
       pullPolicy: IfNotPresent
+    defaultCertificate:
+      enabled: true
+      # -- Traefik default certificate secret name
+      secretName: sredevops-cl-tls
+      # -- Traefik default certificate secret namespace
+      secretNamespace: kube-system
+      # -- Traefik default certificate secret key
+      secretKey: tls.crt
