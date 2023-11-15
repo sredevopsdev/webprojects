@@ -35,9 +35,14 @@ spec:
         volumeMounts:
         - name: postgresql-pv
           mountPath: /var/lib/postgresql/data
+          readOnly: false
         - name: init-data
           mountPath: /docker-entrypoint-initdb.d/init-n8n-user.sh
           subPath: init-data.sh
+          readOnly: true
+        envFrom:
+        - secretRef:
+            name: postgres-secret
         env:
         - name: PGDATA
           value: /var/lib/postgresql/data/pgdata
@@ -52,7 +57,10 @@ spec:
               name: postgres-secret
               key: POSTGRES_PASSWORD
         - name: POSTGRES_DB
-          value: n8n
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_DB
         - name: POSTGRES_NON_ROOT_USER
           valueFrom:
             secretKeyRef:
@@ -64,7 +72,7 @@ spec:
               name: postgres-secret
               key: POSTGRES_NON_ROOT_PASSWORD
         - name: POSTGRES_HOST
-          value: postgres-service
+          value: postgres
         - name: POSTGRES_PORT
           value: '5432'
       restartPolicy: Always
