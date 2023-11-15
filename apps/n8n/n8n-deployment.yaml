@@ -34,11 +34,14 @@ spec:
         - name: DB_TYPE
           value: postgresdb
         - name: DB_POSTGRESDB_HOST
-          value: postgres-service.n8n.svc.cluster.local
+          value: postgres-n8n
         - name: DB_POSTGRESDB_PORT
           value: "5432"
         - name: DB_POSTGRESDB_DATABASE
-          value: n8n
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_DB
         - name: DB_POSTGRESDB_USER
           valueFrom:
             secretKeyRef:
@@ -71,9 +74,9 @@ spec:
       - name: n8n-claim0
         persistentVolumeClaim:
           claimName: n8n-claim0
-      - name: n8n-secret
-        secret:
-          secretName: n8n-secret
+      # - name: n8n-secret
+      #   secret:
+      #     secretName: n8n-secret
       - name: postgres-secret
         secret:
           secretName: postgres-secret
