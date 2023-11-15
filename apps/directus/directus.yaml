@@ -24,22 +24,27 @@ spec:
         volumeMounts:
         - name: directus-uploads
           mountPath: /directus/uploads
+          readOnly: false
+          
         - name: directus-extensions
           mountPath: /directus/extensions
+          readOnly: false
+
         securityContext:
           allowPrivilegeEscalation: false
 
         resources:
           limits:
-            cpu: 1000m
-            memory: 1Gi
+            cpu: 2000m
+            memory: 2Gi
           requests:
-            cpu: 500m
-            memory: 512Mi
+            cpu: 0m
+            memory: 0Mi
       volumes:
       - name: directus-uploads
         persistentVolumeClaim:
           claimName: directus-uploads
+        
       - name: directus-extensions
         persistentVolumeClaim:
           claimName: directus-extensions
