@@ -26,7 +26,7 @@ spec:
     crds: CreateReplace
   interval: 24h0m0s
   releaseName: k8s-stack
-  targetNamespace: kube-system
+  targetNamespace: default
   upgrade:
     crds: CreateReplace
 
