@@ -7,3 +7,26 @@ metadata:
 spec:
   interval: 12h0m0s
   url: https://prometheus-community.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+      version: "54.0.1"
+  install:
+    crds: CreateReplace
+  interval: 24h0m0s
+  releaseName: k8s-stack
+  targetNamespace: kube-system
+  upgrade:
+    crds: CreateReplace
+
